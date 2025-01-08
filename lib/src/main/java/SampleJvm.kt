@@ -1,5 +1,7 @@
 import com.github.zly2006.synapse.Entity
+import kotlinx.serialization.Serializable
 
+//@Serializable
 @Entity(tableName = "person")
 class Person(
     val name: String,

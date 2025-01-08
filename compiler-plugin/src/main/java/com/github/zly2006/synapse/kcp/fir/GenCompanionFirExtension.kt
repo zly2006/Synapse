@@ -5,6 +5,7 @@ import com.github.zly2006.synapse.kcp.DebugLogger
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.declarations.getAnnotationByClassId
 import org.jetbrains.kotlin.fir.expressions.FirAnnotation
+import org.jetbrains.kotlin.fir.expressions.FirAnnotationCall
 import org.jetbrains.kotlin.fir.extensions.FirDeclarationGenerationExtension
 import org.jetbrains.kotlin.fir.extensions.NestedClassGenerationContext
 import org.jetbrains.kotlin.fir.extensions.predicate.DeclarationPredicate
@@ -30,6 +31,11 @@ internal class GenCompanionFirExtension(
         classSymbol: FirClassSymbol<*>,
         context: NestedClassGenerationContext,
     ): Set<Name> {
+        val classes = FirAnnotationCall::class.java.classLoader.getResourceAsStream("org/jetbrains/kotlin/fir/resolve")
+            ?.readBytes()?.decodeToString()
+        // this is empty ???
+        debugLogger.warn("classes= $classes")
+        debugLogger.warn("getNestedClassifiersNames ${classSymbol.name}")
         val annotation = classSymbol.entityClassAnnotation(session)
         if (annotation != null) {
             return setOf(
@@ -60,5 +66,5 @@ internal class GenCompanionFirExtension(
 }
 
 fun FirBasedSymbol<*>.entityClassAnnotation(session: FirSession): FirAnnotation? {
-    return resolvedAnnotationsWithArguments.getAnnotationByClassId(Constants.annotationClassId, session)
+    return resolvedCompilerAnnotationsWithClassIds.getAnnotationByClassId(Constants.annotationClassId, session)
 }

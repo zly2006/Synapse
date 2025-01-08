@@ -13,7 +13,7 @@ configure<TestCompilerExtension> {
 
 dependencies {
     // ktx serialization
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.0")
 }
 
 kotlin {
