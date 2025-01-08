@@ -19,9 +19,9 @@ internal class EntityClassTransformer(
             it.type.classFqName?.asString() == "com.github.zly2006.synapse.Entity"
         }?.let {
             @Suppress("UNCHECKED_CAST")
-            val tableName = it.getValueArgument(0) as? IrConst<String> ?: throw IllegalStateException("Entity annotation must have a value")
+            val tableName = it.getValueArgument(0) as? IrConst ?: throw IllegalStateException("Entity annotation must have a value")
             debugLogger.warn("Found Entity annotation on class ${declaration.name}, tableName: ${tableName.value}")
-            EntityClassModel(declaration, tableName.value)
+            EntityClassModel(declaration, tableName.value as String)
         }
         if (entity != null) {
             requireNotNull(declaration.companionObject())

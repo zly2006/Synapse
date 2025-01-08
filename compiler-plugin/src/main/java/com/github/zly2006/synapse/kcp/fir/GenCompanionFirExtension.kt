@@ -65,6 +65,6 @@ internal class GenCompanionFirExtension(
     }
 }
 
-fun FirBasedSymbol<*>.entityClassAnnotation(session: FirSession): FirAnnotation? {
+private fun FirBasedSymbol<*>.entityClassAnnotation(session: FirSession): FirAnnotation? {
     return resolvedCompilerAnnotationsWithClassIds.getAnnotationByClassId(Constants.annotationClassId, session)
 }

@@ -8,7 +8,6 @@ import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.expressions.impl.IrConstructorCallImpl
 import org.jetbrains.kotlin.ir.types.classFqName
 import org.jetbrains.kotlin.ir.types.defaultType
-import org.jetbrains.kotlin.ir.types.impl.originalKotlinType
 import org.jetbrains.kotlin.ir.util.constructors
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
@@ -74,16 +73,17 @@ internal class CreateFuncTransformer(
                 val newConstructor = implClassSymbol.constructors.first()
 
                 //Create the constructor call for _ExampleApiImpl()
-                val newCall = IrConstructorCallImpl(
-                    0,
-                    0,
-                    type = implClassSymbol.defaultType,
-                    symbol = newConstructor,
-                    0,
-                    0,
-                    0,
-                    null
-                )
+                val newCall = irCall
+//                IrConstructorCallImpl(
+//                    0,
+//                    0,
+//                    type = implClassSymbol.defaultType,
+//                    symbol = newConstructor,
+//                    0,
+//                    0,
+//                    0,
+//                    null
+//                )
 
                 //Set _ExampleApiImpl() as argument for create<ExampleApi>()
                 irCall.putValueArgument(0, newCall)
