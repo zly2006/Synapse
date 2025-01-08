@@ -1,6 +1,8 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     kotlin("jvm") version("2.0.0")
-    kotlin("kapt") version("2.0.0")
+//    kotlin("kapt") version("2.0.0")
     id("java-gradle-plugin")
     `maven-publish`
 }
@@ -8,6 +10,19 @@ plugins {
 group = "de.jensklingenberg"
 version = "1.0.0"
 
+java {
+    sourceCompatibility =  JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_21
+    }
+}
+kotlin {
+    jvmToolchain(21)
+}
 
 allprojects {
     repositories {

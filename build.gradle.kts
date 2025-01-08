@@ -1,7 +1,6 @@
 import org.gradle.kotlin.dsl.libs
 
 buildscript {
-
     repositories {
         mavenLocal()
         google()
@@ -14,7 +13,7 @@ buildscript {
     }
 }
 plugins {
-    id("org.jetbrains.kotlin.multiplatform") version libs.versions.kotlin apply false
+    kotlin("jvm") version libs.versions.kotlin
 }
 apply(plugin = "compiler.gradleplugin.helloworld")
 

@@ -1,38 +1,34 @@
+import de.jensklingenberg.gradle.TestCompilerExtension
+
 plugins {
-    id("org.jetbrains.kotlin.multiplatform") version libs.versions.kotlin
+    kotlin("jvm") version libs.versions.kotlin
+    kotlin("plugin.serialization") version libs.versions.kotlin
+    application
 }
 apply(plugin = "compiler.gradleplugin.helloworld")
 
-
-configure<de.jensklingenberg.gradle.TestCompilerExtension> {
+configure<TestCompilerExtension> {
     enabled = true
 }
 
-kotlin {
-    jvm()
-    linuxX64("linux")
-    js()
-    sourceSets {
-        val commonMain by getting {}
-
-        val jsMain by getting {
-
-            dependencies {
-
-            }
-        }
-
-        val jvmMain by getting {
-
-
-            dependencies {
-
-            }
-        }
-        val linuxMain by getting {
-
-        }
-
-    }
+dependencies {
+    // ktx serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
 }
 
+kotlin {
+    jvmToolchain(21)
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+tasks.compileKotlin {
+    outputs.upToDateWhen { false }
+}
+
+//application {
+//    mainClassName = "de.jensklingenberg.gradle.MainKt"
+//}
