@@ -1,19 +1,21 @@
 import com.github.zly2006.synapse.Entity
-import kotlinx.serialization.Serializable
 
-//@Serializable
 @Entity(tableName = "person")
 class Person(
     val name: String,
     val age: Int,
-    val address: String
-)
+    val address: String,
+) {
+    companion object {
+        external fun hello(): String
+        external fun printExpr(expr: (Person) -> Unit): String
+    }
+}
 
 
 fun main() {
-    /**
-     * The compiler plugin will replace this with create<MyTest>(_MyTestProvider)
-     */
-//    val myTest = create<MyTest>()
-//    myTest.print()
+    Person("Alice", 20, "Wonderland")
+    println(Person.printExpr {
+        it.age >= 35
+    })
 }
