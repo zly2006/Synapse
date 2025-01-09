@@ -34,7 +34,6 @@ internal class CreateFuncTransformer(
 
         data class Const(val value: Any?, val irConst: IrConst<*>) : SqlExpr() {
             override fun toIr(p: IrPluginContext): IrStatement {
-                p.irBuiltIns
                 return irConst
             }
         }
